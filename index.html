@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club San Luis basquet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #FF4D00;
+            --secondary: #1E293B;
+            --accent: #FFA41B;
+            --light: #F8FAFC;
+        }
+
+        /* Header y Navegación */
+        header {
+            background-color: var(--secondary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Secciones Generales */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Galería */
+        .gallery-section {
+            background: var(--light);
+            padding: 6rem 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            height: 300px;
+            background: white;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-description {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 1.5rem;
+            transition: 0.5s ease;
+        }
+
+        .gallery-description h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .gallery-description p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.8);
+        }
+
+        .gallery-item:hover .gallery-description {
+            bottom: 0;
+        }
+
+        /* Eventos */
+        .events-section {
+            padding: 6rem 2rem;
+            background: var(--secondary);
+            color: white;
+        }
+
+        .events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .event-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Historia */
+        .history-section {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .history-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .gallery-description {
+                padding: 1rem;
+            }
+
+            .gallery-description h3 {
+                font-size: 1rem;
+            }
+
+            .gallery-description p {
+                font-size: 0.8rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                🏀 Club San Luis basquet <span>BC</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#historia">Historia</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>CLUB SAN LUIS BASQUET</h1>
+            <p>Donde los campeones se forjan y los sueños se hacen realidad</p>
+            <a href="#contacto" class="cta-button">¡Únete al equipo!</a>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery-section">
+        <h2 class="section-title">Momentos Destacados</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="img/1.jpg" alt="Partido SLB REC vs SLB VIETCONG">
+                <div class="gallery-description">
+                    <h3>Clásico San Luis Basquet</h3>
+                    <p>Otro clásico de San Luis Basquet en pleno torneo no federado, por la tercera fecha enfrentó a SLB REC y SLB VIETCONG, con victoria del primero 70 a 62.</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="img/2.jpg" alt="Entrenamiento">
+                <div class="gallery-description">
+                    <h3>Entrenamiento Intensivo</h3>
+                    <p>Sesiones de entrenamiento donde nuestros jugadores mejoran sus habilidades día a día.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/3.jpg" alt="Celebración">
+                <div class="gallery-description">
+                    <h3>Momentos de Victoria</h3>
+                    <p>Celebrando los logros y el esfuerzo del equipo en cada partido.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/4.jpg" alt="Equipo juvenil">
+                <div class="gallery-description">
+                    <h3>Categorías Juveniles</h3>
+                    <p>Formando el futuro del baloncesto con nuestras categorías juveniles.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/5.jpg" alt="Instalaciones">
+                <div class="gallery-description">
+                    <h3>Nuestras Instalaciones</h3>
+                    <p>Espacios de primer nivel para el desarrollo de nuestros deportistas.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/6.jpg" alt="Trofeos">
+                <div class="gallery-description">
+                    <h3>Nuestros Logros</h3>
+                    <p>Historia de éxitos y dedicación reflejada en cada trofeo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos" class="events-section">
+        <h2 class="section-title">Próximos Eventos</h2>
+        <div class="events-container">
+            <div class="event-card">
+                <div class="event-date">15 JUL 2024</div>
+                <h3>Torneo Elite Warriors</h3>
+                <p>Competencia de alto nivel con los mejores equipos de la región.</p>
+            </div>
+            <div class="event-card">
+                <div class="event-date">20 AGO 2024</div>
+                <h3>Campus de Verano</h3>
+                <p>Entrenamiento intensivo para jóvenes talentos.</p>
+            </div>
+            <div class="event-card">
+                <div class="event-date">10 SEP 2024</div>
+                <h3>Draft Warriors 2024</h3>
+                <p>Selección de nuevos talentos para nuestras categorías.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="historia" class="history-section">
+        <h2 class="section-title">Nuestra Historia</h2>
+        <div class="history-content">
+            <p>Club San Luis basquet nació en 1985 con una visión clara: crear un espacio donde la pasión por el básquet se transforme en excelencia deportiva. Desde entonces, hemos formado a más de 1000 jugadores, conquistado 30 títulos regionales y 5 nacionales.</p>
+            <br>
+            <p>Nuestro compromiso con la excelencia nos ha llevado a ser reconocidos como uno de los clubes más prestigiosos del país, con un programa de desarrollo juvenil que es referente en la región.</p>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Av. del Deporte 123</p>
+                <p>📞 (123) 456-7890</p>
+                <p>✉️ info@warriorsbc.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Horarios</h3>
+                <p>Lunes a Viernes: 9:00 - 22:00</p>
+                <p>Sábados: 10:00 - 20:00</p>
+                <p>Domingos: 10:00 - 14:00</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto de header al scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>    
