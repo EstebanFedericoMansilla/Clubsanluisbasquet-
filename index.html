@@ -326,6 +326,50 @@
                 display: block;
             }
         }
+        /* Estilos para el modal de imagen */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 3px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
     </style>
 </head>
 <body>
@@ -359,15 +403,15 @@
         <h2 class="section-title">Momentos Destacados</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="img/1.jpg" alt="Partido SLB REC vs SLB VIETCONG">
+                <img src="img/3.jpg" alt="Partido SLB REC vs SLB VIETCONG">
                 <div class="gallery-description">
                     <h3>Clásico San Luis Basquet</h3>
-                    <p>Otro clásico de San Luis Basquet en pleno torneo no federado, por la tercera fecha enfrentó a SLB REC y SLB VIETCONG, con victoria del primero 70 a 62.</p>
+                    <p>Basquet recreativo.</p>
                 </div>
             </div>
             
             <div class="gallery-item">
-                <img src="img/2.jpg" alt="Entrenamiento">
+                <img src="img/1.jpg" alt="Entrenamiento">
                 <div class="gallery-description">
                     <h3>Entrenamiento Intensivo</h3>
                     <p>Sesiones de entrenamiento donde nuestros jugadores mejoran sus habilidades día a día.</p>
@@ -375,7 +419,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="img/3.jpg" alt="Celebración">
+                <img src="img/2.jpg" alt="Celebración">
                 <div class="gallery-description">
                     <h3>Momentos de Victoria</h3>
                     <p>Celebrando los logros y el esfuerzo del equipo en cada partido.</p>
@@ -385,16 +429,20 @@
             <div class="gallery-item">
                 <img src="img/4.jpg" alt="Equipo juvenil">
                 <div class="gallery-description">
-                    <h3>Categorías Juveniles</h3>
-                    <p>Formando el futuro del baloncesto con nuestras categorías juveniles.</p>
+                    <h3>Categorías Mayores</h3>
+                    <p>LLEGÓ LA PRIMERA VICTORIA DEL AÑO PARA SAN LUIS BASQUET APOLO 11 EN LA CATEGORIA +40. EN UN PARTIDO MUY DISPUTADO HASTA LOS ULTIMOS SEGUNDOS EL EQUIPO LOGRÓ SOSTENER UNA VICTORIA 57 A 53 ANTE TODA LA EXPERIENCIA DE ESTUDIANTES OLD BASQUET.</p>
                 </div>
             </div>
 
             <div class="gallery-item">
                 <img src="img/5.jpg" alt="Instalaciones">
                 <div class="gallery-description">
-                    <h3>Nuestras Instalaciones</h3>
-                    <p>Espacios de primer nivel para el desarrollo de nuestros deportistas.</p>
+                    <h3>LA TERCERA FECHA DEL TORNEO NO FEDERADO</h3>
+                    <p>TERMINÓ LA TERCERA FECHA DEL TORNEO NO FEDERADO Y LOS RESULTADOS DE LOS EQUIPOS DE SAN LUIS BASQUET FUERON LOS SIGUIENTES:
+                        🏀SLB REC SE QUEDÓ CON EL CLÁSICO AL VENCER A SLB VIETCONG EN UN EMOTIVO PARTIDO DONDE SE DISPUTARON EL TRIUNFO HASTA EL FINAL.
+                        🏀SLB 1 DOBLEGÓ AL DURISIMO REOXIDADOS POR 95 A 65.
+                        🏀SLB APOLO 11 CONSIGUE LA PRIMER VICTORIA DEL 2025 AL VENCER A ESTUDIANTES OLD BASQUET 57 A 53.
+                        🏀SLB ALCATRAZ CAYÓ DERROTADO DE PIE ANTE EL PERRAJE, UN RIVAL DE MUCHO PODERÍO..</p>
                 </div>
             </div>
 
@@ -402,7 +450,9 @@
                 <img src="img/6.jpg" alt="Trofeos">
                 <div class="gallery-description">
                     <h3>Nuestros Logros</h3>
-                    <p>Historia de éxitos y dedicación reflejada en cada trofeo.</p>
+                    <p>SE VIENE LA FECHA 3 DEL TORNEO NO FEDERADO PARA SAN LUIS BASQUET 1 Y EL EQUIPO ESTA LISTO PARA UN PARTIDO DIFICIL ANTE REOXIDADOS. LOS JUGADORES DEJARAN TODO PARA SEGUIR EN LO MÁS ALTO DE LA TABLA !!
+                        IMAGEN: @chiquito_vivas MARCELO VIVAS (VIKINGO).
+                        LA CITA ES EN CLUB GUAYCURÚ EL DIA VIERNES 31 A LAS 2230 HS.</p>
                 </div>
             </div>
         </div>
@@ -437,7 +487,49 @@
             <p>Nuestro compromiso con la excelencia nos ha llevado a ser reconocidos como uno de los clubes más prestigiosos del país, con un programa de desarrollo juvenil que es referente en la región.</p>
         </div>
     </section>
-
+    <!-- Modal para las imágenes -->
+<div class="modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <script>
+        // Efecto de header al scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    
+        // Funcionalidad del modal de imágenes
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.getElementsByClassName('close-modal')[0];
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+    
+        galleryImages.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+                modal.classList.add('active');
+                modalImg.src = this.src;
+            });
+        });
+    
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+        });
+    
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    
+        // Cerrar con la tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</div>
     <footer id="contacto">
         <div class="footer-content">
             <div class="footer-section">
