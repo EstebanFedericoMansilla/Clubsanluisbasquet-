@@ -326,6 +326,53 @@
                 display: block;
             }
         }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        /* Ajustes responsivos para el logo */
+        @media (max-width: 768px) {
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+        }
+
         /* Estilos para el modal de imagen */
 .modal {
     display: none;
@@ -377,7 +424,8 @@
     <header>
         <div class="nav-container">
             <div class="logo">
-                🏀 Club San Luis basquet <span>BC</span>
+                <img src="Logo.jpg" alt="Club San Luis Basquet Logo" class="logo-img">
+                <span class="logo-text">Club San Luis Basquet <span>BC</span></span>
             </div>
             <nav>
                 <ul>
